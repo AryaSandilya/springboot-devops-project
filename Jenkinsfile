@@ -16,9 +16,12 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Deploy') {
             steps {
-                sh 'docker build -t petclinic:v1 .'
+                sh '''
+                docker rm -f petclinic || true
+                docker run -d --name petclinic -p 8081:8080 petclinic:v1
+                '''
             }
         }
     }
