@@ -1,0 +1,209 @@
+Started by user Admin
+Obtained Jenkinsfile from git https://github.com/AryaSandilya/springboot-devops-project.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/petclinic-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/petclinic-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/AryaSandilya/springboot-devops-project.git # timeout=10
+Fetching upstream changes from https://github.com/AryaSandilya/springboot-devops-project.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/AryaSandilya/springboot-devops-project.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 0fc6c673224aa5640ba23370d721557378c83cf4 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0fc6c673224aa5640ba23370d721557378c83cf4 # timeout=10
+Commit message: "Editing JenkinsFile to Jenkisnfile"
+ > git rev-list --no-walk 0fc6c673224aa5640ba23370d721557378c83cf4 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone)
+[Pipeline] git
+The recommended git tool is: git
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/petclinic-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/AryaSandilya/springboot-devops-project.git # timeout=10
+Fetching upstream changes from https://github.com/AryaSandilya/springboot-devops-project.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/AryaSandilya/springboot-devops-project.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 0fc6c673224aa5640ba23370d721557378c83cf4 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0fc6c673224aa5640ba23370d721557378c83cf4 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main 0fc6c673224aa5640ba23370d721557378c83cf4 # timeout=10
+Commit message: "Editing JenkinsFile to Jenkisnfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ mvn clean package -DskipTests
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------< [0;36morg.springframework.samples:spring-petclinic[0;1m >------------[m
+[[1;34mINFO[m] [1mBuilding petclinic 4.0.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.5.0:clean[m [1m(default-clean)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Deleting /var/lib/jenkins/workspace/petclinic-pipeline/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-enforcer-plugin:3.6.2:enforce[m [1m(enforce-java)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-javaformat-maven-plugin:0.0.47:validate[m [1m(default)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-checkstyle-plugin:3.6.0:check[m [1m(nohttp-checkstyle-validation)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] You have 0 Checkstyle violations.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.14:prepare-agent[m [1m(default)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] argLine set to -javaagent:/var/lib/jenkins/.m2/repository/org/jacoco/org.jacoco.agent/0.8.14/org.jacoco.agent-0.8.14-runtime.jar=destfile=/var/lib/jenkins/workspace/petclinic-pipeline/target/jacoco.exec
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mgit-commit-id-maven-plugin:9.0.2:revision[m [1m(default)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] dotGitDirectory '/var/lib/jenkins/workspace/petclinic-pipeline/.git'
+[[1;34mINFO[m] Collected git.build.user.name with value 
+[[1;34mINFO[m] Collected git.build.user.email with value 
+[[1;34mINFO[m] Using environment variable based branch name. GIT_BRANCH = origin/main
+[[1;34mINFO[m] Collected git.branch with value origin/main
+[[1;34mINFO[m] Collected git.commit.id.describe with value 0fc6c67
+[[1;34mINFO[m] Collected git.commit.id.describe-short with value 0fc6c67
+[[1;34mINFO[m] Collected git.commit.id with value 0fc6c673224aa5640ba23370d721557378c83cf4
+[[1;34mINFO[m] Collected git.commit.id.abbrev with value 0fc6c67
+[[1;34mINFO[m] Collected git.dirty with value false
+[[1;34mINFO[m] Collected git.commit.user.name with value Rahul Raj
+[[1;34mINFO[m] Collected git.commit.user.email with value rahul_raj@newgensoft.com
+[[1;34mINFO[m] Collected git.commit.message.full with value Editing JenkinsFile to Jenkisnfile
+[[1;34mINFO[m] Collected git.commit.message.short with value Editing JenkinsFile to Jenkisnfile
+[[1;34mINFO[m] Collected git.commit.time with value 2026-06-14T11:23:47Z
+[[1;34mINFO[m] Collected git.commit.author.time with value 2026-06-14T11:23:47Z
+[[1;34mINFO[m] Collected git.commit.committer.time with value 2026-06-14T11:23:47Z
+[[1;34mINFO[m] Collected git.remote.origin.url with value https://github.com/AryaSandilya/springboot-devops-project.git
+[[1;34mINFO[m] Collected git.tags with value 
+[[1;34mINFO[m] Collected git.tag with value 
+[[1;34mINFO[m] Collected git.closest.tag.name with value 
+[[1;34mINFO[m] Collected git.closest.tag.commit.count with value 
+[[1;34mINFO[m] Collected git.total.commit.count with value 1033
+[[1;34mINFO[m] Collected git.local.branch.ahead with value NO_REMOTE
+[[1;34mINFO[m] Collected git.local.branch.behind with value NO_REMOTE
+[[1;34mINFO[m] Collected git.build.time with value 2024-11-28T14:37:52Z
+[[1;34mINFO[m] Collected git.build.version with value 4.0.0-SNAPSHOT
+[[1;34mINFO[m] Collected git.build.host with value ip-172-31-1-210
+[[1;34mINFO[m] Collected git.build.number with value 3
+[[1;34mINFO[m] including property 'git.tags' in results
+[[1;34mINFO[m] including property 'git.build.version' in results
+[[1;34mINFO[m] including property 'git.branch' in results
+[[1;34mINFO[m] including property 'git.build.host' in results
+[[1;34mINFO[m] including property 'git.build.number' in results
+[[1;34mINFO[m] including property 'git.commit.id' in results
+[[1;34mINFO[m] including property 'git.commit.user.email' in results
+[[1;34mINFO[m] including property 'git.local.branch.behind' in results
+[[1;34mINFO[m] including property 'git.commit.author.time' in results
+[[1;34mINFO[m] including property 'git.build.user.name' in results
+[[1;34mINFO[m] including property 'git.dirty' in results
+[[1;34mINFO[m] including property 'git.closest.tag.commit.count' in results
+[[1;34mINFO[m] including property 'git.commit.user.name' in results
+[[1;34mINFO[m] including property 'git.commit.id.abbrev' in results
+[[1;34mINFO[m] including property 'git.commit.id.describe-short' in results
+[[1;34mINFO[m] including property 'git.total.commit.count' in results
+[[1;34mINFO[m] including property 'git.commit.id.describe' in results
+[[1;34mINFO[m] including property 'git.build.user.email' in results
+[[1;34mINFO[m] including property 'git.commit.message.short' in results
+[[1;34mINFO[m] including property 'git.commit.committer.time' in results
+[[1;34mINFO[m] including property 'git.tag' in results
+[[1;34mINFO[m] including property 'git.closest.tag.name' in results
+[[1;34mINFO[m] including property 'git.local.branch.ahead' in results
+[[1;34mINFO[m] including property 'git.commit.time' in results
+[[1;34mINFO[m] including property 'git.build.time' in results
+[[1;34mINFO[m] including property 'git.commit.message.full' in results
+[[1;34mINFO[m] including property 'git.remote.origin.url' in results
+[[1;34mINFO[m] Writing properties file [/var/lib/jenkins/workspace/petclinic-pipeline/target/classes/git.properties] (for project petclinic)...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:4.0.3:build-info[m [1m(default)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mcyclonedx-maven-plugin:2.9.1:makeAggregateBom[m [1m(default)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] CycloneDX: Resolving Dependencies
+[[1;34mINFO[m] CycloneDX: Creating BOM version 1.6 with 108 component(s)
+[[1;34mINFO[m] CycloneDX: Writing and validating BOM (JSON): /var/lib/jenkins/workspace/petclinic-pipeline/target/classes/META-INF/sbom/application.cdx.json
+[[1;33mWARNING[m] Unknown keyword meta:enum - you should define your own Meta Schema. If the keyword is irrelevant for validation, just use a NonValidationKeyword or if it should generate annotations AnnotationKeyword
+[[1;33mWARNING[m] Unknown keyword deprecated - you should define your own Meta Schema. If the keyword is irrelevant for validation, just use a NonValidationKeyword or if it should generate annotations AnnotationKeyword
+[[1;34mINFO[m]            attaching as spring-petclinic-4.0.0-SNAPSHOT-cyclonedx.json
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Copying 3 resources from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 45 resources from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:compile[m [1m(default-compile)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 30 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/petclinic-pipeline/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.1:testCompile[m [1m(default-testCompile)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 17 source files with javac [debug parameters release 17] to target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.4:test[m [1m(default-test)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Tests are skipped.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mjacoco-maven-plugin:0.8.14:report[m [1m(report)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Skipping JaCoCo execution due to missing execution data file.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Building jar: /var/lib/jenkins/workspace/petclinic-pipeline/target/spring-petclinic-4.0.0-SNAPSHOT.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:4.0.3:repackage[m [1m(repackage)[m @ [36mspring-petclinic[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact /var/lib/jenkins/workspace/petclinic-pipeline/target/spring-petclinic-4.0.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[[1;34mINFO[m] The original artifact has been renamed to /var/lib/jenkins/workspace/petclinic-pipeline/target/spring-petclinic-4.0.0-SNAPSHOT.jar.original
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  12.523 s
+[[1;34mINFO[m] Finished at: 2026-06-14T11:28:06Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Build)
+[Pipeline] sh
++ docker build -t petclinic:v1 .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   81.8MB
+Step 1/4 : FROM eclipse-temurin:17-jre
+ ---> 801637825303
+Step 2/4 : COPY target/*.jar app.jar
+ ---> c573127d2fad
+Step 3/4 : EXPOSE 8080
+ ---> Running in e2fac1f2cf14
+ ---> Removed intermediate container e2fac1f2cf14
+ ---> 43cdf33f693f
+Step 4/4 : ENTRYPOINT ["java","-jar","app.jar"]
+ ---> Running in c0f2595ca976
+ ---> Removed intermediate container c0f2595ca976
+ ---> a05e1d7815b4
+Successfully built a05e1d7815b4
+Successfully tagged petclinic:v1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

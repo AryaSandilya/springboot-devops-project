@@ -1,0 +1,247 @@
+Production Deployment & Monitoring Platform
+
+Environment:
+AWS EC2, Linux, Jenkins, Docker, Nginx, Prometheus, Grafana, GitHub, Spring Boot
+
+• Deployed a containerized Spring Boot application on AWS EC2 using Docker.
+
+• Configured Jenkins pipelines for automated build and deployment processes.
+
+• Implemented Nginx reverse proxy for secure application access and traffic routing.
+
+• Configured Prometheus and Grafana for infrastructure and application monitoring.
+
+• Managed Linux server administration, Docker containers, and deployment automation.
+
+• Improved deployment efficiency and operational visibility through monitoring dashboards and automated delivery pipelines.
+
+springboot-ec2-devops-project
+
+├── screenshots
+│   ├── ec2.png
+│   ├── jenkins.png
+│   ├── docker.png
+│   ├── app.png
+│   └── grafana.png
+│
+├── Jenkinsfile
+├── Dockerfile
+├── README.md
+└── source-code
+
+sudo apt-get update 
+sudo apt upgrade -y
+
+sudo apt install openjdk-21-jdk
+sudo apt install git
+sudo apt install nginx
+
+sudo apt install docker.io -y
+sudo systemctl enable docker
+sudo systemctl start docker 
+sudo systemctl status docker
+sudo usermod -aG docker ubuntu
+newgrp docker
+docker run hello-world
+
+
+Docker
+Docker Installation
+
+Installed Docker on EC2.
+
+Verified:
+
+
+Dockerization
+
+Created Dockerfile:
+
+FROM eclipse-temurin:17-jre
+
+COPY target/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","app.jar"]
+
+Build Image
+docker build -t petclinic:v1 .
+
+Run Container
+docker run -d --name petclinic -p 8081:8080 petclinic:v1
+
+Application accessible at:
+
+http://EC2-PUBLIC-IP:8081
+
+
+====================================================================
+
+Jenkins
+
+
+Configured:
+
+Java 17
+Maven
+Git
+Jenkins Pipeline
+
+Created pipeline with stages:
+
+Clone
+Build
+Docker Build
+Deploy
+
+Pipeline Flow:
+
+GitHub
+  ↓
+Jenkins
+  ↓
+Maven Build
+  ↓
+Docker Build
+  ↓
+Docker Deployment
+
+Deployment Stage
+stage('Deploy') {
+    steps {
+        sh '''
+        docker stop petclinic || true
+        docker rm -f petclinic || true
+
+        docker run -d \
+        --name petclinic \
+        -p 8081:8080 \
+        petclinic:v1
+        '''
+    }
+}
+
+================================================
+
+GitHub Integration
+Repository
+
+Created GitHub repository.
+
+Webhook
+
+Configured GitHub Webhook:
+
+http://<EC2-IP>:8080/github-webhook/
+Trigger
+
+Enabled:
+
+GitHub hook trigger for GITScm polling
+
+Result:
+
+Git Push
+   ↓
+GitHub Webhook
+   ↓
+Jenkins Triggered Automatically
+   ↓
+Build & Deploy
+
+No manual "Build Now" required.
+
+
+=====================================================
+
+Monitoring
+Node Exporter
+
+Installed Node Exporter.
+
+Verified:
+
+curl localhost:9100/metrics
+
+Metrics available:
+
+CPU
+Memory
+Disk
+Network
+Filesystem
+
+Configured Node Exporter as a Linux service using systemd.
+
+Prometheus
+
+Created:
+
+/home/ubuntu/prometheus/prometheus.yml
+
+Configured scraping:
+
+scrape_configs:
+  - job_name: 'node-exporter'
+
+Started Prometheus container:
+
+docker run -d \
+--name prometheus \
+-p 9090:9090 \
+-v prometheus.yml:/etc/prometheus/prometheus.yml \
+prom/prometheus
+
+Verified:
+
+Targets → UP
+Grafana
+
+Started Grafana:
+
+docker run -d \
+--name grafana \
+-p 3000:3000 \
+grafana/grafana
+
+Connected:
+
+Grafana
+   ↓
+Prometheus
+   ↓
+Node Exporter
+
+Dashboard available for:
+
+CPU Usage
+Memory Usage
+Disk Usage
+Network Usage
+Load Average
+
+===============================================
+
+Final Architecture
+Developer
+    ↓
+GitHub
+    ↓
+Webhook
+    ↓
+Jenkins
+    ↓
+Maven Build
+    ↓
+Docker Build
+    ↓
+Docker Deployment
+    ↓
+Spring PetClinic (8081)
+
+Node Exporter (9100)
+        ↓
+Prometheus (9090)
+        ↓
+Grafana (3000)
