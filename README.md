@@ -216,7 +216,7 @@ Exposes infrastructure metrics such as:
 
 ### Prometheus
 
-Responsible for:
+Responsible for:-
 
 * Metrics Collection
 * Time Series Storage
