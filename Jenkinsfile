@@ -19,8 +19,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                docker stop petclinic || true
                 docker rm -f petclinic || true
-                docker run -d --name petclinic -p 8081:8080 petclinic:v1
+
+                docker run -d \
+                --name petclinic \
+                -p 8081:8080 \
+                petclinic:v1
                 '''
             }
         }
